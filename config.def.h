@@ -56,20 +56,38 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *dmenucmd[]       = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *termcmd[]        = { "urxvtc", NULL };
+static const char *firefoxcmd[]     = { "firefox", NULL };
+static const char *slimlockcmd[]    = { "slimlock", NULL };
+static const char *amixInc[]        = { "amixer", "set", "Master", "unmute", "5+", "-M", NULL };
+static const char *amixDec[]        = { "amixer", "set", "Master", "unmute", "5-", "-M", NULL };
+static const char *amixSil[]        = { "amixer", "set", "Master", "0%", NULL };
+static const char *mpdPrev[]        = { "mpc", "prev", NULL };
+static const char *mpdNext[]        = { "mpc", "next", NULL };
+static const char *mpdPlayPause[]   = { "mpc", "toggle", NULL };
+static const char *mpdPlayStop[]    = { "mpc", "stop", NULL };
+static const char *randomwp[]       = { "feh", "--randomize", "--recursive", "--bg-fill", "/home/langest/currentwps/", NULL };
+static const char *wicdgtk[]        = { "wicd-gtk", "--no-tray", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	/* Launchers */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = firefoxcmd } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slimlockcmd } },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = randomwp } },
+
+	/* Window management */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_l,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_h,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_k,      setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_j,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -94,6 +112,19 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+
+	/* Special keys */
+	{ 0,                   0x1008FF2D,      spawn,          {.v = slimlockcmd } },
+	{ 0,                   0x1008FF95,      spawn,          {.v = wicdgtk } },
+
+	/* Media keys */
+	{ 0,                   0x1008FF11,      spawn,          {.v = amixDec } },
+	{ 0,                   0x1008FF12,      spawn,          {.v = amixSil } },
+	{ 0,                   0x1008ff13,      spawn,          {.v = amixInc } },
+	{ 0,                   0x1008FF14,      spawn,          {.v = mpdPlayPause } },
+	{ 0,                   0x1008FF15,      spawn,          {.v = mpdPlayStop } },
+	{ 0,                   0x1008FF16,      spawn,          {.v = mpdPrev } },
+	{ 0,                   0x1008FF17,      spawn,          {.v = mpdNext } },
 };
 
 /* button definitions */
