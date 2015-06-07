@@ -2,6 +2,7 @@
 
 /* appearance */
 static const char *fonts[] = {
+    "Inconsolata:size=10",
     "Sans:size=10.5",
     "VL Gothic:size=10.5",
     "WenQuanYi Micro Hei:size=10.5",
