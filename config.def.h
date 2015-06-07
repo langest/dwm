@@ -7,13 +7,16 @@ static const char *fonts[] = {
     "VL Gothic:size=10.5",
     "WenQuanYi Micro Hei:size=10.5",
 };
+#define FG_LIGHT_ "#8cbc65"
+#define FG_DARK_  "#689742"
+#define BG_       "#1e1e1e"
 static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#005577";
-static const char selbgcolor[]      = "#005577";
-static const char selfgcolor[]      = "#eeeeee";
+static const char normbordercolor[] = BG_;
+static const char normbgcolor[]     = BG_;
+static const char normfgcolor[]     = FG_DARK_;
+static const char selbordercolor[]  = FG_DARK_;
+static const char selbgcolor[]      = FG_LIGHT_;
+static const char selfgcolor[]      = BG_;
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
