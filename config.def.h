@@ -32,8 +32,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
+	{ "Gimp",        NULL,    NULL,       0,            True,        -1 },
+	{ "Firefox",     NULL,    NULL,       1 << 8,       False,       -1 },
+	{ "Thunderbird", NULL,    NULL,       1 << 7,       False,       -1 },
 };
 
 /* layout(s) */
@@ -64,6 +65,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[]       = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]        = { "urxvtc", NULL };
 static const char *firefoxcmd[]     = { "firefox", NULL };
+static const char *thunderbirdcmd[] = { "thunderbird", NULL };
 static const char *slimlockcmd[]    = { "slimlock", NULL };
 static const char *amixInc[]        = { "amixer", "set", "Master", "unmute", "5+", "-M", NULL };
 static const char *amixDec[]        = { "amixer", "set", "Master", "unmute", "5-", "-M", NULL };
@@ -82,6 +84,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = firefoxcmd } },
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunderbirdcmd } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slimlockcmd } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = randomwp } },
 
