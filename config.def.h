@@ -7,17 +7,19 @@ static const char *fonts[] = {
     "VL Gothic:size=10.5",
     "WenQuanYi Micro Hei:size=10.5",
 };
-#define FG_LIGHT_   "#029779" /* Turquoise */
-#define TEXT_LIGHT_ "#bbd5d2" /* Blueish white */
-#define BG_LIGHT_   "#2d2d2d" /* Dark gray */
-#define BG_DARK_    "#0d0d0d" /* Almost black */
+/* #define ORANGE    "#F26101" Orange that fits the colorscheme */
+#define WHITE     "#EAEAEA"
+#define DARK_TEAL "#5A96A6"
+#define TEAL      "#8BE7FF"
+#define BLACK     "#2D2D2D"
+
 static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
-static const char normbordercolor[] = BG_DARK_;
-static const char normbgcolor[]     = BG_LIGHT_;
-static const char normfgcolor[]     = TEXT_LIGHT_;
-static const char selbordercolor[]  = TEXT_LIGHT_;
-static const char selbgcolor[]      = FG_LIGHT_;
-static const char selfgcolor[]      = TEXT_LIGHT_;
+static const char normbordercolor[] = BLACK;
+static const char normbgcolor[]     = BLACK;
+static const char normfgcolor[]     = TEAL;
+static const char selbordercolor[]  = WHITE;
+static const char selbgcolor[]      = WHITE;
+static const char selfgcolor[]      = DARK_TEAL;
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
