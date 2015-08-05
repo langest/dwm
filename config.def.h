@@ -2,24 +2,24 @@
 
 /* appearance */
 static const char *fonts[] = {
+    "Lane - Narrow:size=10",
     "Inconsolata:size=10",
     "Sans:size=10.5",
     "VL Gothic:size=10.5",
     "WenQuanYi Micro Hei:size=10.5",
 };
 /* #define ORANGE    "#F26101" Orange that fits the colorscheme */
-#define WHITE     "#EAEAEA"
-#define DARK_TEAL "#5A96A6"
-#define TEAL      "#8BE7FF"
+#define WHITE     "#eff0f1"
+#define BLUE      "#3daee9"
 #define BLACK     "#2D2D2D"
 
 static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
 static const char normbordercolor[] = BLACK;
 static const char normbgcolor[]     = BLACK;
-static const char normfgcolor[]     = TEAL;
-static const char selbordercolor[]  = WHITE;
+static const char normfgcolor[]     = BLUE;
+static const char selbordercolor[]  = BLUE;
 static const char selbgcolor[]      = WHITE;
-static const char selfgcolor[]      = DARK_TEAL;
+static const char selfgcolor[]      = BLUE;
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
