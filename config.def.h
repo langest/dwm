@@ -4,9 +4,7 @@
 static const char *fonts[] = {
     "Lane - Narrow:size=10",
     "Inconsolata:size=10",
-    "Sans:size=10.5",
-    "VL Gothic:size=10.5",
-    "WenQuanYi Micro Hei:size=10.5",
+    "WenQuanYi Micro Hei:size=12",
 };
 /* #define ORANGE    "#F26101" Orange that fits the colorscheme */
 #define WHITE     "#eff0f1"
@@ -72,16 +70,19 @@ static const char *dmenucmd[]       = { "dmenu_run", "-m", dmenumon, "-fn", dmen
 static const char *termcmd[]        = { "urxvtc", NULL };
 static const char *firefoxcmd[]     = { "firefox", NULL };
 static const char *thunderbirdcmd[] = { "thunderbird", NULL };
-static const char *slimlockcmd[]    = { "slimlock", NULL };
-static const char *amixInc[]        = { "amixer", "set", "Master", "unmute", "2+", "-M", NULL };
-static const char *amixDec[]        = { "amixer", "set", "Master", "unmute", "2-", "-M", NULL };
-static const char *amixSil[]        = { "amixer", "set", "Master", "0%", NULL };
+static const char *lockcmd[]        = { "sh", "/home/langest/dotfiles/scripts/lock.sh", NULL };
+static const char *amixInc[]        = { "amixer", "set", "Master", "-c", "1", "unmute", "2+", "-M", NULL };
+static const char *amixDec[]        = { "amixer", "set", "Master", "-c", "1", "unmute", "2-", "-M", NULL };
+static const char *amixSil[]        = { "amixer", "set", "Master", "-c", "1", "0%", NULL };
 static const char *mpdPrev[]        = { "mpc", "prev", NULL };
 static const char *mpdNext[]        = { "mpc", "next", NULL };
 static const char *mpdPlayPause[]   = { "mpc", "toggle", NULL };
 static const char *mpdPlayStop[]    = { "mpc", "stop", NULL };
-static const char *randomwp[]       = { "feh", "--randomize", "--recursive", "--bg-fill", "/home/langest/currentwps/", NULL };
+static const char *randomwp[]       = { "feh", "--randomize", "--recursive", "--bg-fill", "/home/langest/currentWps/", NULL };
 static const char *wicdgtk[]        = { "wicd-gtk", "--no-tray", NULL };
+static const char *brightInc[]   = { "xbacklight", "-inc", "10", NULL };
+static const char *brightDec[]   = { "xbacklight", "-dec", "10", NULL };
+static const char *brightZero[]  = { "xbacklight", "-set", "0", NULL };
 
 
 static Key keys[] = {
@@ -91,7 +92,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = firefoxcmd } },
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunderbirdcmd } },
-	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slimlockcmd } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = randomwp } },
 
 	/* Window management */
@@ -130,17 +131,22 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 
 	/* Special keys */
-	{ 0,                   0x1008FF2D,      spawn,          {.v = slimlockcmd } },
-	{ 0,                   0x1008FF95,      spawn,          {.v = wicdgtk } },
+	{ MODKEY,                       XK_F5,    spawn,          {.v = brightDec} },
+	{ MODKEY,                       XK_F6,    spawn,          {.v = brightInc} },
+	{ MODKEY,                       XK_F10,    spawn,          {.v = amixSil} },
+	{ MODKEY,                       XK_F11,    spawn,          {.v = amixDec} },
+	{ MODKEY,                       XK_F12,    spawn,          {.v = amixInc} },
 
-	/* Media keys */
-	{ 0,                   0x1008FF11,      spawn,          {.v = amixDec } },
-	{ 0,                   0x1008FF12,      spawn,          {.v = amixSil } },
-	{ 0,                   0x1008ff13,      spawn,          {.v = amixInc } },
-	{ 0,                   0x1008FF14,      spawn,          {.v = mpdPlayPause } },
-	{ 0,                   0x1008FF15,      spawn,          {.v = mpdPlayStop } },
-	{ 0,                   0x1008FF16,      spawn,          {.v = mpdPrev } },
-	{ 0,                   0x1008FF17,      spawn,          {.v = mpdNext } },
+//	/* Lenovo Special keys */
+//	{ 0,                   0x1008FF2D,      spawn,          {.v = slimlockcmd } },
+//	{ 0,                   0x1008FF95,      spawn,          {.v = wicdgtk } },
+//	{ 0,                   0x1008FF11,      spawn,          {.v = amixDec } },
+//	{ 0,                   0x1008FF12,      spawn,          {.v = amixSil } },
+//	{ 0,                   0x1008ff13,      spawn,          {.v = amixInc } },
+//	{ 0,                   0x1008FF14,      spawn,          {.v = mpdPlayPause } },
+//	{ 0,                   0x1008FF15,      spawn,          {.v = mpdPlayStop } },
+//	{ 0,                   0x1008FF16,      spawn,          {.v = mpdPrev } },
+//	{ 0,                   0x1008FF17,      spawn,          {.v = mpdNext } },
 };
 
 /* button definitions */
