@@ -82,6 +82,8 @@ static const char *wicdgtk[]        = { "wicd-gtk", "--no-tray", NULL };
 static const char *brightInc[]   = { "xbacklight", "-inc", "10", NULL };
 static const char *brightDec[]   = { "xbacklight", "-dec", "10", NULL };
 static const char *brightZero[]  = { "xbacklight", "-set", "0", NULL };
+static const char *setUsKeys[]   = { "setxkbmap", "us", "-option", "ctrl:nocaps", NULL };
+static const char *setSeKeys[]   = { "setxkbmap", "se", "-option", "ctrl:nocaps", NULL };
 
 
 static Key keys[] = {
@@ -93,6 +95,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunderbirdcmd } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = randomwp } },
+
+	/* Keyboard management */
+	{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = setUsKeys } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = setSeKeys } },
 
 	/* Window management */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
