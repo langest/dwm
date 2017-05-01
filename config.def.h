@@ -2,9 +2,8 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Lane - Narrow:size=10",
-    "Inconsolata:size=10",
-    "WenQuanYi Micro Hei:size=12",
+    "Inconsolata:size=11",
+    "WenQuanYi Micro Hei:size=11",
 };
 /* #define ORANGE    "#F26101" Orange that fits the colorscheme */
 #define WHITE     "#eff0f1"
