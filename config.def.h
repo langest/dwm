@@ -79,11 +79,15 @@ static const char *mpdPlayPause[]   = { "mpc", "toggle", NULL };
 static const char *mpdPlayStop[]    = { "mpc", "stop", NULL };
 static const char *randomwp[]       = { "feh", "--randomize", "--recursive", "--bg-fill", "/home/langest/currentWps/", NULL };
 static const char *wicdgtk[]        = { "wicd-gtk", "--no-tray", NULL };
-static const char *brightInc[]   = { "xbacklight", "-inc", "10", NULL };
-static const char *brightDec[]   = { "xbacklight", "-dec", "10", NULL };
-static const char *brightZero[]  = { "xbacklight", "-set", "0", NULL };
-static const char *setUsKeys[]   = { "setxkbmap", "us", "-option", "ctrl:nocaps", NULL };
-static const char *setSeKeys[]   = { "setxkbmap", "se", "-option", "ctrl:nocaps", NULL };
+static const char *brightInc[]      = { "xbacklight", "-inc", "10", NULL };
+static const char *brightDec[]      = { "xbacklight", "-dec", "10", NULL };
+static const char *brightZero[]     = { "xbacklight", "-set", "0", NULL };
+static const char *setUsKeys[]      = { "setxkbmap", "us", "-option", "ctrl:nocaps", NULL };
+static const char *setSeKeys[]      = { "setxkbmap", "se", "-option", "ctrl:nocaps", NULL };
+
+static const char *hdmiOff[]        = { "xrandr", "--output", "HDMI1", "--off", NULL };
+static const char *hdmiMirror[]     = { "xrandr", "--output", "HDMI1", "--same-as", "eDP1", "--auto", NULL };
+static const char *hdmiRightOf[]    = { "xrandr", "--output", "HDMI1", "--right-of", "eDP1", "--auto", NULL };
 
 
 static Key keys[] = {
@@ -99,6 +103,11 @@ static Key keys[] = {
 	/* Keyboard management */
 	{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = setUsKeys } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = setSeKeys } },
+
+  /* Screen management */
+	{ MODKEY|ShiftMask,             XK_F7,     spawn,          {.v = hdmiOff} },
+	{ MODKEY|ShiftMask,             XK_F8,     spawn,          {.v = hdmiMirror} },
+	{ MODKEY|ShiftMask,             XK_F9,     spawn,          {.v = hdmiRightOf} },
 
 	/* Window management */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
