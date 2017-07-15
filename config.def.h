@@ -1,26 +1,29 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *fonts[] = {
-    "Inconsolata:size=11",
-    "WenQuanYi Micro Hei:size=11",
-};
+
 /* #define ORANGE    "#F26101" Orange that fits the colorscheme */
 #define WHITE     "#eff0f1"
 #define BLUE      "#3daee9"
 #define BLACK     "#2D2D2D"
 
-static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
-static const char normbordercolor[] = BLACK;
-static const char normbgcolor[]     = BLACK;
-static const char normfgcolor[]     = BLUE;
-static const char selbordercolor[]  = BLUE;
-static const char selbgcolor[]      = WHITE;
-static const char selfgcolor[]      = BLUE;
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const Bool showbar           = True;     /* False means no bar */
-static const Bool topbar            = True;     /* False means bottom bar */
+static const int showbar            = 1;        /* 0 means no bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
+static const char *fonts[] = { "Inconsolata:size=11", "WenQuanYi Micro Hei:size=11", };
+static const char dmenufont[] = "-*-Inconsolata-medium-r-*-*-16-*-*-*-*-*-*-*";
+
+static const char col_fg_normal[]      = BLUE;
+static const char col_bg_normal[]      = BLACK;
+static const char col_boarder_normal[] = BLACK;
+static const char col_fg_selected[]    = BLUE;
+static const char col_bg_selected[]    = WHITE;
+static const char *colors[][3] = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_fg_normal, col_bg_normal, col_boarder_normal },
+	[SchemeSel]  = { col_fg_selected, col_bg_selected,  col_bg_selected  },
+};
 
 /* tagging */
 static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
@@ -30,16 +33,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",        NULL,    NULL,       0,            True,        -1 },
-	{ "Firefox",     NULL,    NULL,       1 << 8,       False,       -1 },
-	{ "Thunderbird", NULL,    NULL,       1 << 7,       False,       -1 },
+	/* class         instance    title       tags mask     isfloating   monitor */
+	{ "Gimp",        NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",     NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Thunderbird", NULL,       NULL,       1 << 7,       0,           -1 },
 };
 
 /* layout(s) */
-static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster      = 1;    /* number of clients in master area */
-static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const int nmaster     = 1;    /* number of clients in master area */
+static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 #include "bstack.c"
 #include "bstackhoriz.c"
@@ -65,7 +68,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]       = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[]       = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg_normal, "-nf", col_fg_normal, "-sb", col_bg_selected, "-sf", col_fg_selected, NULL };
 static const char *termcmd[]        = { "urxvtc", NULL };
 static const char *firefoxcmd[]     = { "firefox", NULL };
 static const char *thunderbirdcmd[] = { "thunderbird", NULL };
@@ -88,7 +91,6 @@ static const char *setSeKeys[]      = { "setxkbmap", "se", "-option", "ctrl:noca
 static const char *hdmiOff[]        = { "xrandr", "--output", "HDMI1", "--off", NULL };
 static const char *hdmiMirror[]     = { "xrandr", "--output", "HDMI1", "--same-as", "eDP1", "--auto", NULL };
 static const char *hdmiRightOf[]    = { "xrandr", "--output", "HDMI1", "--right-of", "eDP1", "--auto", NULL };
-
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -179,4 +181,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
