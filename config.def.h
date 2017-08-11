@@ -73,24 +73,18 @@ static const char *termcmd[]        = { "urxvtc", NULL };
 static const char *firefoxcmd[]     = { "firefox", NULL };
 static const char *thunderbirdcmd[] = { "thunderbird", NULL };
 static const char *lockcmd[]        = { "sh", "/home/langest/dotfiles/scripts/lock.sh", NULL };
-static const char *amixInc[]        = { "amixer", "set", "Master", "-c", "1", "unmute", "2+", "-M", NULL };
-static const char *amixDec[]        = { "amixer", "set", "Master", "-c", "1", "unmute", "2-", "-M", NULL };
-static const char *amixSil[]        = { "amixer", "set", "Master", "-c", "1", "0%", NULL };
+/*
 static const char *mpdPrev[]        = { "mpc", "prev", NULL };
 static const char *mpdNext[]        = { "mpc", "next", NULL };
 static const char *mpdPlayPause[]   = { "mpc", "toggle", NULL };
 static const char *mpdPlayStop[]    = { "mpc", "stop", NULL };
+*/
 static const char *randomwp[]       = { "feh", "--randomize", "--recursive", "--bg-fill", "/home/langest/currentWps/", NULL };
 static const char *wicdgtk[]        = { "wicd-gtk", "--no-tray", NULL };
-static const char *brightInc[]      = { "xbacklight", "-inc", "10", NULL };
-static const char *brightDec[]      = { "xbacklight", "-dec", "10", NULL };
-static const char *brightZero[]     = { "xbacklight", "-set", "0", NULL };
-static const char *setUsKeys[]      = { "setxkbmap", "us", "-option", "ctrl:nocaps", NULL };
-static const char *setSeKeys[]      = { "setxkbmap", "se", "-option", "ctrl:nocaps", NULL };
 
 static const char *hdmiOff[]        = { "xrandr", "--output", "HDMI1", "--off", NULL };
 static const char *hdmiMirror[]     = { "xrandr", "--output", "HDMI1", "--same-as", "eDP1", "--auto", NULL };
-static const char *hdmiRightOf[]    = { "xrandr", "--output", "HDMI1", "--right-of", "eDP1", "--auto", NULL };
+static const char *hdmiAbove[]    = { "xrandr", "--output", "HDMI1", "--above", "eDP1", "--auto", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -103,13 +97,13 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = randomwp } },
 
 	/* Keyboard management */
-	{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = setUsKeys } },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = setSeKeys } },
+	{ MODKEY|ShiftMask,             XK_u,      spawn,          SHCMD("setxkbmap us -option ctrl:nocaps && pkill dwmstatus -SIGUSR1") },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("setxkbmap se -option ctrl:nocaps && pkill dwmstatus -SIGUSR1") },
 
   /* Screen management */
 	{ MODKEY|ShiftMask,             XK_F7,     spawn,          {.v = hdmiOff} },
 	{ MODKEY|ShiftMask,             XK_F8,     spawn,          {.v = hdmiMirror} },
-	{ MODKEY|ShiftMask,             XK_F9,     spawn,          {.v = hdmiRightOf} },
+	{ MODKEY|ShiftMask,             XK_F9,     spawn,          {.v = hdmiAbove} },
 
 	/* Window management */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -124,7 +118,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[3]} }, /* bstack */
 	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[0]} }, /* original */
-	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[4]} }, /* bstack horiz */
+	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[4]} }, /* bstack horiz */
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, /* floating */
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, /* monocle */
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
@@ -146,12 +140,13 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask|ControlMask, XK_q,      quit,           {0} },
 
+
 	/* Special keys */
-	{ MODKEY,                       XK_F5,    spawn,          {.v = brightDec} },
-	{ MODKEY,                       XK_F6,    spawn,          {.v = brightInc} },
-	{ MODKEY,                       XK_F10,    spawn,          {.v = amixSil} },
-	{ MODKEY,                       XK_F11,    spawn,          {.v = amixDec} },
-	{ MODKEY,                       XK_F12,    spawn,          {.v = amixInc} },
+	{ MODKEY,                       XK_F5,     spawn,          SHCMD("xbacklight -dec 10 && pkill dwmstatus -SIGUSR1") },
+	{ MODKEY,                       XK_F6,     spawn,          SHCMD("xbacklight -inc 10 && pkill dwmstatus -SIGUSR1") },
+	{ MODKEY,                       XK_F10,    spawn,          SHCMD("amixer set Master -c 1 0% && pkill dwmstatus -SIGUSR1") },
+	{ MODKEY,                       XK_F11,    spawn,          SHCMD("amixer set Master -c 1 unmute 2- -M && pkill dwmstatus -SIGUSR1") },
+	{ MODKEY,                       XK_F12,    spawn,          SHCMD("amixer set Master -c 1 unmute 2+ -M && pkill dwmstatus -SIGUSR1") },
 
 //	/* Lenovo Special keys */
 //	{ 0,                   0x1008FF2D,      spawn,          {.v = slimlockcmd } },
